@@ -1,6 +1,6 @@
 {
     "builds": [{
-        "source": "hazeeeee/wsgi.py",
+        "src": "hazeeeee/wsgi.py",
         "use": "@vercel/python",
         "config": {
             "maxLambdaSize": "15mb",
@@ -9,8 +9,8 @@
     }],
     "routes" : [
         {
-            "source": "/(.*)",
-            "destination": "hazeeeee/wsgi.py"
+            "src": "/(.*)",
+            "dest": "hazeeeee/wsgi.py"
         }
     ]
 }
