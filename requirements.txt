@@ -4,6 +4,5 @@ django-material-admin==1.8.6
 django-postgresql==0.0.3
 Pillow==9.5.0
 psycopg2-binary==2.9.6
-sqlparse==0.4.4
 typing-extensions==4.6.3
 tzdata==2023.3
