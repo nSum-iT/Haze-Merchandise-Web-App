@@ -1,0 +1,220 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<head>
+  <!-- Latest compiled and minified CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Latest compiled JavaScript -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+  <style media="screen">
+          
+      .product-grid{ font-family: 'Poppins', sans-serif; }
+      .product-grid .product-image{
+          overflow: hidden;
+          position: relative;
+          z-index: 1;
+      }
+      .product-grid .product-image a.image{display: block; }
+      .product-grid .product-image img{
+          width: 100%;
+          height: auto;
+      }
+      .product-grid .product-image .img-1{ transition: all 0.3s ease 0s; }
+
+
+      .product-grid .product-links{
+          padding: 0;
+          margin: 0;
+          list-style: none;
+          z-index: 1;
+      }
+      .product-grid .product-links li{
+          margin: 5px 0;
+          opacity: 0;
+          transform: translateX(100%);
+          transition: all .3s ease;
+      }
+      .product-grid .product-links li:nth-child(2){ transition-delay: .1s; }
+      .product-grid .product-links li:nth-child(3){ transition-delay: .2s; }
+      .product-grid:hover .product-links li{
+          opacity: 1;
+          transform: translateX(0); 
+      }
+      .product-grid .product-links li button{
+          color: #fff;
+          background: #555;
+          font-size: 18px;
+          text-align: center;
+          width: 130px;
+          height: 40px;
+          margin-left: 10px;
+          text-decoration: none;
+          display: block;
+          transition: all .3s ease;
+          border: none;
+          cursor: pointer;
+      }
+      .product-grid .product-links li button:disabled {
+          
+          opacity: 0.5;
+          cursor: not-allowed;
+      }
+      .product-grid .product-links li button:disabled:hover {
+          
+          opacity: 0.5;
+          cursor: not-allowed;
+      }
+
+      
+      .product-grid .product-links li button:hover{
+          color: #fff;
+          background:#000; 
+          cursor: pointer;
+      }
+      .product-grid .product-content{
+          background: #fff;
+          padding: 15px 0 0;
+          
+      }
+
+      .product-grid .title{
+          
+          font-size: 15px;
+          font-weight: 500;
+          text-transform: capitalize;
+          margin: 0 0 8px;
+          
+      }
+      .product-grid .title a{
+          color: #333;
+          transition: all 0.3s ease 0s;
+      }
+      .product-grid .title a:hover{ color: #ff6f00; }
+      .product-grid .price{
+          color: #a3a3a3;
+          font-size: 15px;
+          font-weight: 500;
+      }
+      .product-grid .price span{
+          color: #999;
+          font-size: 14px;
+          font-weight: 400;
+          text-decoration: line-through;
+          margin-right: 5px;
+      }
+      @media screen and (max-width: 990px){
+          .product-grid{ margin-bottom: 30px; }
+      }
+
+      .product-content .size-options {
+      display: none;
+      }
+
+      .product-grid:hover .price-wrapper .price {
+      display: none;
+      }
+
+      .product-grid:hover .price-wrapper .size-options {
+      display: block;
+      }
+
+
+      
+  </style>
+  
+</head>
+<!-- ======= Hero Section ======= -->
+<section id="hero" class="d-flex align-items-center">
+
+    
+</section><!-- End Hero -->
+
+
+
+  
+<!-- ======= New Arrivals Section ======= -->
+<section id="product" class="product container-fluid">
+  <div class="section-title">
+    <h2>New Arrivals</h2>
+  </div>
+  <div class="row">
+    {% for product in products %}
+    <div class="col-md-3 col-sm-6 col-6 mb-2">
+      <div class="product-grid">
+        <div class="product-image">
+          <a href="{% url 'product_detail' product.name %}" class="image">
+            <img class="img-1" src="{{ product.imageURL }}">
+            
+          </a>
+        </div>
+        <div class="product-content text-center">
+          <h3 class="title"><a href="{% url 'product_detail' product.name %}" style="text-decoration:none">{{product.name}}</a></h3>
+          <div class="price-wrapper">
+            <div class="price">${{product.price}}</div>
+            <div class="size-options">
+              <label>
+                <input type="radio" name="{{ product.id }}-size" value="S"> S
+              </label>
+              <label>
+                <input type="radio" name="{{ product.id }}-size" value="M"> M
+              </label>
+              <label>
+                <input type="radio" name="{{ product.id }}-size" value="L"> L
+              </label>
+              <label>
+                <input type="radio" name="{{ product.id }}-size" value="XL"> XL
+              </label>
+            </div>
+            <ul class="product-links">
+              <li>
+                <center><button data-product="{{product.id}}" data-action="add" class="add-btn update-cart" disabled>Add to Cart</button></center>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</section>
+
+<!-- End New Arrivals Section -->
+
+
+<script>
+  // Get all the size radio buttons
+const sizeRadios = document.querySelectorAll('input[type="radio"][name$="-size"]');
+
+// Loop through each size radio button
+sizeRadios.forEach(radio => {
+ // Add an event listener for when the radio button changes
+ radio.addEventListener('change', () => {
+   // Get the corresponding "Add to Cart" button
+   const addButton = radio.closest('.product-grid').querySelector('.update-cart');
+   // Check if a size has been selected
+   if (radio.checked) {
+     // Enable the "Add to Cart" button
+     addButton.removeAttribute('disabled');
+     // Disable the "Add to Cart" buttons for other sizes within the same product grid
+     const productGrid = radio.closest('.product-grid');
+     productGrid.querySelectorAll('.update-cart').forEach(btn => {
+       if (btn !== addButton) {
+         btn.setAttribute('disabled', true);
+       }
+     });
+   } else {
+     // Disable the "Add to Cart" button for this product
+     addButton.setAttribute('disabled', true);
+   }
+ });
+});
+
+
+
+
+ </script>
+
+
+{% endblock %}

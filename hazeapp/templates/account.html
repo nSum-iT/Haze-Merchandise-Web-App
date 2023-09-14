@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<style>
+    .btn-color{
+        background-color: #000000;
+        color: #ffffff;
+    }
+
+    .btn-color:hover{
+        background-color: red;;
+    }
+</style>
+<div class="container my-5">
+    <div class="row">
+        <div class="col-lg-6">
+            <h2>Personal Information</h2>
+            <p>Name: {{ customer.first_name }} {{ customer.last_name }}</p>
+            <p>Email: {{ customer.email }}</p>
+            <p>Phone: {{ customer.phone }}</p>
+        </div>
+        <div class="col-lg-6">
+    
+            <h2>Shipping Address</h2>
+            {% if shipping_address %}
+                <p>{{ shipping_address.address }}</p>
+                <p>{{ shipping_address.city }}, {{ shipping_address.state }} {{ shipping_address.zipcode }}</p>
+            {% else %}
+                <p>No shipping address on file.</p>
+            {% endif %}
+        </div>
+    </div>
+
+
+  <h2>Recent Orders</h2>
+  <div class="row">
+    {% if orders %}
+      {% for order in orders %}
+        <div class="col-md-6">
+          <div class="card my-3">
+            <div class="card-header">
+              <h4>Order Placed: {{ order.date_ordered|date:"F d, Y" }}</h4>
+            </div>
+            <div class="card-body">
+              <h5 class="card-title">Product: {{ order.product_name }}</h5>
+              <p class="card-text">Quantity: {{ order.quantity }}</p>
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+    {% else %}
+      <p>No recent orders.</p>
+    {% endif %}
+  </div>
+  
+<div>
+    <a href="{% url 'logout' %}" class="btn btn-color mx-1 mb-2 w-30">Log out</a>
+</div>
+
+  {% endblock %}

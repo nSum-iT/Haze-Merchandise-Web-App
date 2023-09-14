@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/p1.css' %}">
+<div class="row">
+    
+    <div class="container my-5">
+        <div class="row">
+          <div class="col-lg-6 mb-4 mb-lg-0">
+            <img src="{{ product.imageURL }}" class="img-fluid" alt="Product Image">
+          </div>
+          <div class="col-lg-6">
+            <h1>{{ product.name }}</h1>
+            <p class="lead">${{ product.price }}</p>
+            <form action="#" method="POST">
+            {% csrf_token %}
+              <div class="mb-3">
+                
+                <select class="form-select" style="width:auto;" id="size" name="size">
+                  <option value="S">Small</option>
+                  <option value="M">Medium</option>
+                  <option value="L">Large</option>
+                  <option value="XL">XLarge</option>
+                </select>
+              </div>
+              <button data-product="{{product.id}}" data-action="add" class="btn btn-dark add-btn update-cart" >Add to Cart</button> 
+            </form>
+            <p class="lead mt-4">Description</p>
+            <p>{{ product.description }}</p>
+          </div>
+        </div>
+        
+      </div>
+
+{% endblock %}
