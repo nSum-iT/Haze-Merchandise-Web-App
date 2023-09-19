@@ -87,7 +87,7 @@ if sqlite3.sqlite_version >= '3.8.3':
             'ENGINE': 'django.db.backends.sqlite3',
             'NAME': BASE_DIR / 'db.sqlite3',
             'OPTIONS': {
-                'deterministic': True,
+                'deterministic': False,
             },
         },
     }
