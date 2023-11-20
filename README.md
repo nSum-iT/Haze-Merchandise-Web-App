@@ -15,13 +15,8 @@ The Haze Merchandise Web App is a full-stack web application designed to streaml
 
 ## Technologies Used
 
-- **Frontend:** HTML, CSS, JavaScript, React.js
-- **Backend:** Node.js, Express.js
-- **Database:** MongoDB
-- **Authentication:** JWT (JSON Web Tokens)
+- **Frontend:** HTML, CSS, JavaScript
+- **Backend:** Python, Django
+- **Database:** SQLite3
 
-## Installation
 
-1. **Clone the Repository:**
-   ```bash
-   git clone https://github.com/nSum-iT/Haze-Merchandise-Web-App.git
