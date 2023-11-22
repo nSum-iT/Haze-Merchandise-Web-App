@@ -1,6 +1,7 @@
 # Haze Merchandise Web App
 
-![Haze Merchandise Web App](URL_TO_IMAGE)
+![Uploading collection.png…]()
+
 
 ## Description
 
