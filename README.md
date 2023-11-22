@@ -1,6 +1,7 @@
 # Haze Merchandise Web App
 
-![Uploading collection.png…]()
+![collection](https://github.com/nSum-iT/Haze-Merchandise-Web-App/assets/121218459/f697c5ba-aab1-44cd-8b0e-b974aac1c0c9)
+
 
 
 ## Description
